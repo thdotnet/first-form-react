@@ -1,17 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState } from 'react'
+import ReactDom from 'react-dom'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const FormComponent = function () {
+  const [firstName, setFirstName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(firstName, email);
+  };
+
+  return (
+    <>
+      <form>
+        <div>
+          <label htmlFor="firstName">First Name:</label>
+          <input type="text" name="firstName" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+        </div>
+        <div>
+          <button onClick={handleSubmit}>Send</button>
+        </div>
+      </form>
+    </>
+  );
+}
+
+export default FormComponent;
+
+ReactDom.render(<FormComponent />, document.getElementById('root'));
